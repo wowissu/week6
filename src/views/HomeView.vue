@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import { useApi } from '@/plugins/api.plugin';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import type { User } from '@/@types/user';
 
+const apiService = useApi();
+const user = ref<User>();
 
 onMounted(() => {
-  useApi()?.getUsers().then((res) => {
-    console.log(res)
+  apiService?.getUsers().then((res) => {
+    user.value = res.data
   })
 })
-
-
 </script>
 
 <template>
-  <main>
-
+  <main >
+    <div class="w-screen h-screen bg-gray-700 text-white flex items-center justify-center">
+      <div class="font-bold tracking-widest">
+        [{{ user?.id }}] {{ user?.name }}
+      </div>
+    </div>
   </main>
 </template>
