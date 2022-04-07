@@ -24,7 +24,7 @@ export const apiProviderKey: InjectionKey<ApiServices> = Symbol('apiProvider');
 const apiPlugin = {
   install(app) {
     const instance = axios.create({
-      baseURL: 'localhost:8081',
+      baseURL: '/api',
     })
 
     const apiServices: ApiServices = {
