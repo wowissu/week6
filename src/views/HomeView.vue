@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useApi } from '@/plugins/api.plugin';
+import { useApi } from '@/api/api.plugin';
 import { onMounted, ref } from 'vue';
 import type { User } from '@/@types/user';
 
@@ -9,6 +9,8 @@ const user = ref<User>();
 onMounted(() => {
   apiService?.getUsers().then((res) => {
     user.value = res.data
+
+    console.log(res.data);
   })
 })
 </script>

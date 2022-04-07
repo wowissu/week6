@@ -1,6 +1,7 @@
 import { inject, type InjectionKey, type Plugin } from 'vue'
 import axios, { type AxiosPromise } from 'axios'
 import type { User } from '@/@types/user';
+import { useMock } from '@/api/mock';
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -19,6 +20,8 @@ const apiPlugin = {
     const instance = axios.create({
       baseURL: '/api',
     })
+
+    useMock(instance);
 
     const apiServices: ApiServices = {
       getUsers() {
