@@ -2,6 +2,7 @@ import { inject, type InjectionKey, type Plugin } from 'vue'
 import axios, { type AxiosPromise } from 'axios'
 import type { User } from '@/@types/user';
 import { useMock } from '@/api/mock';
+import type { Book } from '@/@types/book';
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -10,7 +11,8 @@ declare module 'vue' {
 }
 
 interface ApiServices {
-  getUsers(): AxiosPromise<User>
+  getUsers(): AxiosPromise<User[]>
+  getBooks(): AxiosPromise<Book[]>
 }
 
 export const apiProviderKey: InjectionKey<ApiServices> = Symbol('apiProvider');
@@ -25,7 +27,10 @@ const apiPlugin = {
 
     const apiServices: ApiServices = {
       getUsers() {
-        return instance.get('getUser')
+        return instance.get('getUsers')
+      },
+      getBooks() {
+        return instance.get('getBooks')
       }
     }
 
