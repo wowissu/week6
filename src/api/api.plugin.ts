@@ -40,7 +40,14 @@ const apiPlugin = {
 } as Plugin
 
 export function useApi () {
-  return inject(apiProviderKey);
+
+  const services = inject(apiProviderKey);
+
+  if (!services) {
+    throw new Error('Can not found services');
+  }
+
+  return services;
 }
 
 export default apiPlugin;
